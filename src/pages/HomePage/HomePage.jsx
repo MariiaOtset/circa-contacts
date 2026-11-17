@@ -1,39 +1,62 @@
+import {useState} from "react";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectIsLoggedIn} from "../../redux/auth/selectors";
-import {HiOutlineArrowUpRight,HiOutlineUserPlus,HiOutlineMagnifyingGlass,HiOutlineShieldCheck} from "react-icons/hi2";
+import {HiOutlineArrowUpRight,HiOutlineUserPlus,HiOutlineMagnifyingGlass,HiOutlineShieldCheck,HiOutlineStar,HiOutlineArrowDownTray,HiOutlinePencilSquare} from "react-icons/hi2";
 import css from "./HomePage.module.css";
-const sample=[
- {initials:"AJ",name:"Alex Johnson",role:"Creative director",tone:"lavender"},
- {initials:"SM",name:"Sophie Martin",role:"Brand designer",tone:"peach"},
- {initials:"MR",name:"Marcus Reed",role:"Photographer",tone:"mint"},
- {initials:"TC",name:"Taylor Chen",role:"Product strategist",tone:"blue"}
+const people=[
+ {id:"aj",initials:"AJ",name:"Alex Johnson",role:"Creative director",tone:"lavender"},
+ {id:"sm",initials:"SM",name:"Sophie Martin",role:"Brand designer",tone:"peach"},
+ {id:"mr",initials:"MR",name:"Marcus Reed",role:"Photographer",tone:"mint"},
+ {id:"tc",initials:"TC",name:"Taylor Chen",role:"Product strategist",tone:"blue"}
 ];
 const features=[
- {n:"01",icon:<HiOutlineUserPlus/>,title:"Add the important ones",text:"Save names and numbers in one dedicated, easy-to-manage workspace."},
- {n:"02",icon:<HiOutlineMagnifyingGlass/>,title:"Find anyone in seconds",text:"Search your contacts by name or phone number without digging through lists."},
- {n:"03",icon:<HiOutlineShieldCheck/>,title:"Your own private space",text:"Sign in to access your personal address book. Your people are tied to your account."}
+ {icon:<HiOutlineUserPlus/>,title:"A home for your people",text:"Keep names and numbers in a clean, considered address book."},
+ {icon:<HiOutlineMagnifyingGlass/>,title:"Find them in a moment",text:"Search by name or number, sort, and keep favourites close."},
+ {icon:<HiOutlineShieldCheck/>,title:"Your own workspace",text:"Log in to manage your personal, account-based contacts."}
+];
+const steps=[
+ {n:"01",title:"Add a connection",text:"Create a contact with their name and phone number in seconds."},
+ {n:"02",title:"Keep it organised",text:"Find favourites, search instantly, and update details whenever you need."},
+ {n:"03",title:"Take it with you",text:"Sign in again or export your address book to a simple CSV file."}
 ];
 export default function HomePage(){
  const loggedIn=useSelector(selectIsLoggedIn);
+ const [previewSearch,setPreviewSearch]=useState(""),[onlyStars,setOnlyStars]=useState(false),[stars,setStars]=useState(["sm"]);
  const destination=loggedIn?"/contacts":"/register";
+ const visible=people.filter(person=>(!onlyStars||stars.includes(person.id))&&(person.name+" "+person.role).toLowerCase().includes(previewSearch.toLowerCase()));
  return <div className={css.page}>
   <section className={css.hero}><div className={css.heroGrid+" c-container"}>
-   <div className={css.heroCopy}><p className="c-eyebrow"><span aria-hidden="true">✳</span> CONNECTIONS, BEAUTIFULLY KEPT</p>
-    <h1 className="c-serif">The people<br/>who make<br/><em>it matter.</em></h1>
-    <p>Every good connection deserves a place. Meet CIRCA — a calmer, more beautiful way to keep your favourite people a little closer.</p>
-    <div className={css.actions}><Link to={destination} className="c-btn">{loggedIn?"Open my contacts":"Create your space"} <HiOutlineArrowUpRight/></Link><a href="#how-it-works" className={css.secondary}>Take a closer look <span>↓</span></a></div>
-    <div className={css.heroNote}><span className="c-dot"/><span>YOUR PERSONAL CONTACT MANAGER</span><span>NO SUBSCRIPTION REQUIRED</span></div>
+   <div className={css.heroCopy}>
+    <p className="c-eyebrow">✳ &nbsp; THE ART OF STAYING IN TOUCH</p>
+    <h1 className="c-serif">Your people.<br/><em>Beautifully</em><br/>together.</h1>
+    <p>One lovely, organised place for the people who matter. Save contacts, find familiar names, and keep your circle close — without the clutter.</p>
+    <div className={css.actions}><Link to={destination} className="c-btn">{loggedIn?"Open my contacts":"Get started for free"} <HiOutlineArrowUpRight/></Link><a href="#features" className={css.secondary}>Explore the features <span>↓</span></a></div>
+    <div className={css.heroNote}><span className="c-dot"/> YOUR PERSONAL CONTACTS, SIMPLIFIED <span>·</span> FREE TO EXPLORE</div>
    </div>
-   <div className={css.visual} aria-label="Illustration of the Circa contact manager">
-    <div className={css.orbitOne}/><div className={css.orbitTwo}/><div className={css.floatingNote}><span aria-hidden="true">✦</span><span>Good people.<br/><strong>All in one place.</strong></span></div>
-    <div className={css.preview}><div className={css.previewBar}><div><span className={css.appLogo}>✳</span><strong>CIRCA.</strong></div><span className={css.previewPill}>UI PREVIEW</span></div><div className={css.previewBody}><p>YOUR PEOPLE</p><h2 className="c-serif">The good company.</h2><div className={css.mockSearch}>⌕ &nbsp; Search your people…</div><div className={css.mockHeader}><span>ALL CONTACTS</span><span>04 PEOPLE</span></div>{sample.map(person=><div className={css.previewPerson} key={person.initials}><span className={css[person.tone]}>{person.initials}</span><div><strong>{person.name}</strong><small>{person.role}</small></div><i aria-hidden="true">↗</i></div>)}</div></div>
-    <div className={css.floatingStar}>✳</div>
+   <div className={css.visual}>
+    <div className={css.backCircle} aria-hidden="true"/>
+    <div className={css.preview} aria-label="Interactive contact manager preview with sample data">
+     <div className={css.previewTop}><div><span className={css.mark}>✳</span><strong>CIRCA<span>.</span></strong></div><span className={css.demoBadge}>INTERACTIVE PREVIEW</span></div>
+     <div className={css.previewBody}><div className={css.previewHeading}><div><p>YOUR SAMPLE WORKSPACE</p><h2 className="c-serif">Good company.</h2></div><span>{people.length} people</span></div>
+      <label className={css.previewSearch}><HiOutlineMagnifyingGlass/><input value={previewSearch} onChange={e=>setPreviewSearch(e.target.value)} placeholder="Try searching a name..." aria-label="Search demo contacts"/></label>
+      <div className={css.previewTabs}><button type="button" className={!onlyStars?css.tabActive:""} onClick={()=>setOnlyStars(false)}>All people</button><button type="button" className={onlyStars?css.tabActive:""} onClick={()=>setOnlyStars(true)}>★ Favourites ({stars.length})</button></div>
+      <div className={css.previewList}>{visible.length?visible.map(person=><div key={person.id} className={css.previewPerson}><span className={css.avatar+" "+css[person.tone]}>{person.initials}</span><div><strong>{person.name}</strong><small>{person.role}</small></div><button type="button" title={stars.includes(person.id)?"Remove from demo favourites":"Add to demo favourites"} aria-label={(stars.includes(person.id)?"Remove ":"Save ")+person.name} aria-pressed={stars.includes(person.id)} className={stars.includes(person.id)?css.starActive:""} onClick={()=>setStars(prev=>prev.includes(person.id)?prev.filter(id=>id!==person.id):[...prev,person.id])}><HiOutlineStar/></button></div>):<p className={css.previewEmpty}>No sample contacts found.</p>}</div>
+      <p className={css.previewFoot}>Try searching and starring contacts. Sample data only.</p>
+     </div>
+    </div>
+    <div className={css.floatingTag}><span>✦</span> MADE FOR REAL CONNECTIONS</div>
    </div>
   </div></section>
-  <section className={css.intro+" c-container"} id="how-it-works"><p className="c-eyebrow">THE LITTLE THINGS, DONE WELL</p><div><h2 className="c-serif">Less searching.<br/><em>More connecting.</em></h2><p>Your contacts are more than just phone numbers. CIRCA gives you an intentional space to keep the people who matter within reach.</p></div></section>
-  <section className={css.features+" c-container"} aria-label="How Circa helps">{features.map(f=><article className={css.feature} key={f.n}><div className={css.featureTop}><span>{f.n} / THE EXPERIENCE</span><div>{f.icon}</div></div><h3 className="c-serif">{f.title}</h3><p>{f.text}</p></article>)}</section>
-  <section className={css.story}><div className={css.storyInner+" c-container"}><div className={css.storyVisual}><div className={css.storyBubble}>A little more<br/><em>human.</em></div><div className={css.storyAvatarA}>A</div><div className={css.storyAvatarB}>S</div><div className={css.storyAvatarC}>M</div><span>THE PEOPLE IN YOUR CORNER</span></div><div className={css.storyCopy}><p className="c-eyebrow">KEEP IT PERSONAL</p><h2 className="c-serif">Great things<br/>begin with <em>hello.</em></h2><p>From familiar names to new introductions, keep your circle organised, easy to find, and ready when you need it.</p><Link to={destination} className="c-btn">{loggedIn?"Go to my contacts":"Start your address book"} <HiOutlineArrowUpRight/></Link></div></div></section>
-  <section className={css.closing+" c-container"}><p className="c-eyebrow">YOUR CIRCLE STARTS HERE</p><h2 className="c-serif">Make room for<br/><em>good connections.</em></h2><Link to={destination} className="c-btn">{loggedIn?"Open my workspace":"Get started for free"} <HiOutlineArrowUpRight/></Link></section>
+  <section className={css.quickbar}><div className="c-container"><span>ONE SPACE. YOUR PEOPLE.</span><div><span>✳ Add &amp; edit</span><span>✳ Search &amp; favourite</span><span>✳ Export &amp; keep</span></div></div></section>
+  <section className={css.features+" c-container"} id="features"><div className={css.sectionHead}><div><p className="c-eyebrow">INTUITIVE BY DESIGN</p><h2 className="c-serif">Simple things, <em>done beautifully.</em></h2></div><p>No complicated tools. Just the small, thoughtful features that help you stay connected.</p></div>
+   <div className={css.featureGrid}>{features.map((f,i)=><article className={css.feature} key={f.title}><div className={css.featureTop}><span>0{i+1} / CIRCA</span><span className={css.featureIcon}>{f.icon}</span></div><h3 className="c-serif">{f.title}</h3><p>{f.text}</p></article>)}</div>
+  </section>
+  <section className={css.walkthrough}><div className={css.walkthroughInner+" c-container"}>
+   <div className={css.walkthroughCopy}><p className="c-eyebrow">MADE TO MAKE EVERYDAY EASIER</p><h2 className="c-serif">A better way to<br/><em>keep in touch.</em></h2><p>Everything important, without everything getting in the way.</p><Link to={destination} className="c-btn">{loggedIn?"Go to workspace":"Create your space"} <HiOutlineArrowUpRight/></Link></div>
+   <div className={css.steps}>{steps.map(s=><div className={css.step} key={s.n}><span>{s.n}</span><div><h3>{s.title}</h3><p>{s.text}</p></div><span aria-hidden="true">↗</span></div>)}</div>
+  </div></section>
+  <section className={css.closing+" c-container"}><div><p className="c-eyebrow">YOUR CIRCLE STARTS HERE</p><h2 className="c-serif">Good connections.<br/><em>One beautiful space.</em></h2></div><Link to={destination} className="c-btn">{loggedIn?"Open CIRCA":"Start your address book"} <HiOutlineArrowUpRight/></Link></section>
+  <div className={css.footerExtra} aria-hidden="true"><HiOutlineArrowDownTray/><HiOutlinePencilSquare/><HiOutlineStar/></div>
  </div>;
 }
