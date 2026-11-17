@@ -1,50 +1,14 @@
-import { Form, Formik } from "formik";
+import {Form,Formik} from "formik";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import {useDispatch} from "react-redux";
 import * as Yup from "yup";
-import { logIn } from "../../redux/auth/operations";
+import {logIn} from "../../redux/auth/operations";
 import FormLabel from "../FormLabel/FormLabel";
 import css from "./LoginForm.module.css";
-
-const INITIAL_VALUES = {
-  email: "",
-  password: "",
-};
-
-const VALIDATION_SCHEMA = Yup.object().shape({
-  email: Yup.string()
-    .email("Please enter valid email address")
-    .required("Required"),
-  password: Yup.string().required("Required"),
-});
-
-const showErrorMessage = (error) =>
-  toast.error(
-    error === 400 ? "Incorrect email or password" : "Something went wrong"
-  );
-
-const LoginForm = () => {
-  const dispatch = useDispatch();
-
-  const handleSubmit = (values) => {
-    dispatch(logIn(values)).unwrap().catch(showErrorMessage);
-  };
-  return (
-    <>
-      <Formik
-        onSubmit={handleSubmit}
-        initialValues={INITIAL_VALUES}
-        validationSchema={VALIDATION_SCHEMA}
-      >
-        <Form className={css.form}>
-          <FormLabel title="email" />
-          <FormLabel title="password" />
-          <button className={css.btn} type="submit">
-            Log in
-          </button>
-        </Form>
-      </Formik>
-    </>
-  );
-};
-export default LoginForm;
+const initial={email:"",password:""};
+const schema=Yup.object({email:Yup.string().email("Enter a valid email address").required("Email is required"),password:Yup.string().required("Password is required")});
+export default function LoginForm(){
+ const dispatch=useDispatch();
+ const submit=async(values,{setSubmitting})=>{try{await dispatch(logIn(values)).unwrap();toast.success("Welcome back!");}catch(error){toast.error(error===400||error===401?"Incorrect email or password":"Unable to sign in. Please try again.");}finally{setSubmitting(false);}};
+ return <Formik initialValues={initial} validationSchema={schema} onSubmit={submit}>{({isSubmitting})=><Form className={css.form} noValidate><FormLabel title="email"/><FormLabel title="password"/><button className={css.btn} type="submit" disabled={isSubmitting}>{isSubmitting?"Signing in…":"Log in to my space"} <span aria-hidden="true">↗</span></button><div className={css.note}><span aria-hidden="true">✦</span> YOUR CONTACTS. YOUR PRIVATE SPACE.</div></Form>}</Formik>;
+}

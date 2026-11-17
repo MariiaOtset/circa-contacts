@@ -1,0 +1,8 @@
+import {Link} from "react-router-dom";
+import css from "./AuthPanel.module.css";
+export default function AuthPanel({mode,children}){
+ const signup=mode==="signup";
+ return <section className={css.layout}><aside className={css.art} aria-label="Circa personal contacts"><div className={css.artTop}><span className={css.star}>✳</span><span>CIRCA / YOUR PERSONAL SPACE</span></div><div className={css.artBody}><p>GOOD CONNECTIONS.<br/>ONE BEAUTIFUL HOME.</p><h2 className="c-serif">Stay close to<br/>your <em>people.</em></h2><div className={css.mosaic} aria-hidden="true"><div className={css.cardOne}>A<span>♡</span></div><div className={css.cardTwo}>S<span>✦</span></div><div className={css.cardThree}>M<span>↗</span></div></div></div><div className={css.artBottom}><span>THE ART OF STAYING IN TOUCH</span><span>01 — CONNECTIONS</span></div></aside>
+  <div className={css.content}><div className={css.inner}><p className="c-eyebrow">{signup?"MAKE YOUR OWN SPACE":"WELCOME BACK TO CIRCA"}</p><h1 className="c-serif">{signup?<>Your people.<br/><em>Your place.</em></>:<>Good to have<br/><em>you back.</em></>}</h1><p className={css.description}>{signup?"Create an account and keep your contacts beautifully organised, all in one place.":"Sign in to your personal workspace, where your important connections live."}</p>{children}<p className={css.switch}>{signup?"Already have an account?":"New around here?"} <Link to={signup?"/login":"/register"}>{signup?"Log in":"Create an account"} <span aria-hidden="true">↗</span></Link></p><p className={css.bottom}>✳ &nbsp; CIRCA — KEEP YOUR PEOPLE CLOSE</p></div></div>
+ </section>;
+}
