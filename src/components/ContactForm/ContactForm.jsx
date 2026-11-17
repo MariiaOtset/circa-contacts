@@ -7,7 +7,7 @@ import {addContact,updateContact} from "../../redux/contacts/operations";
 import {selectContacts} from "../../redux/contacts/selectors";
 import {HiOutlineUser,HiOutlinePhone,HiOutlineArrowUpRight} from "react-icons/hi2";
 import css from "./ContactForm.module.css";
-const schema=Yup.object({name:Yup.string().trim().min(2,"Enter at least 2 characters").max(60,"Maximum 60 characters").required("Name is required"),number:Yup.string().trim().required("Phone number is required").test("valid-phone","Use 7–20 digits, with optional +, spaces or brackets",value=>{if(!value)return false;return /^[+\d()\s.-]+$/.test(value)&&/^\+?\d+$/.test(value.replace(/[()\s.\-]/g,""))&&value.replace(/\D/g,"").length>=7&&value.replace(/\D/g,"").length<=20;})});
+const schema=Yup.object({name:Yup.string().trim().min(2,"Enter at least 2 characters").max(60,"Maximum 60 characters").required("Name is required"),number:Yup.string().trim().required("Phone number is required").test("valid-phone","Use 7–20 digits, with optional +, spaces or brackets",value=>{if(!value)return false;return /^[+\d()\s.-]+$/.test(value)&&/^\+?\d+$/.test(value.replace(/[()\s.-]/g,""))&&value.replace(/\D/g,"").length>=7&&value.replace(/\D/g,"").length<=20;})});
 export default function ContactForm({contact=null,onSuccess,onClose}){
  const dispatch=useDispatch(),all=useSelector(selectContacts),nameId=useId(),phoneId=useId();
  const edit=!!contact;
