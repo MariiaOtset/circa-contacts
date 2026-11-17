@@ -98,7 +98,7 @@
  .compact {grid-template-columns:39px minmax(0,1fr) auto;gap:7px 9px;padding:11px}
  .compact .avatar {width:39px;height:39px}
  .compact .phoneLine {gap:6px}
- .compact .phoneLine > svg {display:none}
+ .compact .phoneLine > svg {width:15px;height:15px}
  .compact .phoneLine .copy svg {display:block!important}
  .compact .groupLabel select {width:min(149px,calc(100vw - 148px));max-width:149px}
  .compact .footer > div {gap:5px}
