@@ -11,3 +11,7 @@
 
 .dataActions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 @media(max-width:680px){.dataActions{width:100%}.dataActions button{flex:1}.listHeading{align-items:stretch}}
+
+.listActions{display:flex;align-items:center;gap:13px}.viewSwitch{display:flex;align-items:center;border:1px solid #e6e5f0;border-radius:8px;background:#fff;padding:3px;gap:2px}.listInfo .viewSwitch button{height:29px;width:31px;display:grid;place-items:center;border-radius:6px;color:#9592b2;background:none}.listInfo .viewSwitch .selectedView{background:#eeeafd;color:#6150d4}.listInfo .viewSwitch svg{font-size:17px}
+@media(min-width:1110px){.toolbar{flex-wrap:wrap}.toolbar>.sort{flex:0 0 143px}}
+@media(max-width:640px){.toolbar{display:grid;grid-template-columns:1fr 1fr}.toolbar>div:first-child{grid-column:span 2}.toolbar .sort{min-width:0}.listActions{gap:7px}}
