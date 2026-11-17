@@ -56,3 +56,12 @@ Designed and implemented by [Mariia Otset](https://github.com/MariiaOtset).
 - Better documentation of data boundaries: contact data is stored with the authenticated API, while starred IDs and group labels are browser-only and not synced to other devices.
 
 **Important:** importing sends confirmed contacts to the existing external GoIT API using the signed-in session. No third-party upload service was introduced. Always review the preview before importing.
+
+## Responsive dashboard refinement
+
+The authenticated address book prioritises contacts above decorative content:
+- Compact directory header and inline contact/favourites counters replace a tall promotional-style hero.
+- Full-width responsive contacts grid displays more people without requiring excessive scrolling.
+- **Add contact** opens a native accessible dialog instead of occupying a permanent right-hand sidebar.
+- The privacy notice is a short line beneath the directory, preventing empty full-height columns on tablet and laptop widths.
+- Filters, CSV import/export, favourites, groups, edit and delete remain available.
