@@ -1,15 +1,2 @@
-.wrapper {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-
-  font-weight: 700;
-}
-
-.welcomeText {
-  display: block;
-}
-
-.button {
-  padding: 5px;
-}
+.wrapper{display:flex;align-items:center;gap:12px}.avatar{width:38px;height:38px;border-radius:50%;background:#ded9fb;color:#5e4bd5;display:grid;place-items:center;font-weight:900}.user{display:flex;flex-direction:column;gap:3px;min-width:0;max-width:150px}.user strong{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#31364d}.user span{font-size:8px;color:#a5a8b8;letter-spacing:.1em;font-weight:800}.button{border:1px solid #e4e2f0;border-radius:100px;padding:11px 14px;background:#fff;color:#6c638e;font-size:11px;font-weight:800;white-space:nowrap}.button:hover{background:#f4f1ff}.button span{font-size:15px;margin-left:6px}
+@media(max-width:700px){.user{display:none}.avatar{width:32px;height:32px}.wrapper{gap:7px}.button{padding:8px 10px}}

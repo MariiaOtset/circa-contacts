@@ -1,4 +1,2 @@
-.list {
-  display: flex;
-  gap: 35px;
-}
+.list{display:flex;align-items:center;gap:16px}.login{color:#616980;font-size:12px;font-weight:800}.login:hover{color:#6554dc}.register{display:inline-flex;gap:15px;align-items:center;border-radius:100px;background:#6655da;color:#fff;padding:13px 17px;font-size:12px;font-weight:800;transition:background .2s}.register:hover{background:#4f3ec5}.register span{font-size:17px}
+@media(max-width:380px){.list{gap:9px}.register{gap:5px;padding:11px;font-size:11px}.login{font-size:11px}}
