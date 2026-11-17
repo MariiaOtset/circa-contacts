@@ -1,73 +1,125 @@
-.card{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid #e9e9f3;border-radius:17px;padding:17px;min-height:219px;box-shadow:0 10px 32px #36335108;transition:box-shadow .2s}.card:hover{box-shadow:0 18px 40px #39355c13}.head{display:flex;align-items:flex-start;justify-content:space-between}.avatar{width:53px;height:53px;border-radius:15px;display:grid;place-items:center;font-size:16px;font-weight:900;letter-spacing:.025em}.violet{background:#e4dcff;color:#6b53c6}.peach{background:#fce7da;color:#c47e5e}.mint{background:#e1f2e7;color:#529a7a}.sky{background:#e0e9fc;color:#5c84c3}.yellow{background:#f9efd6;color:#b89555}.pink{background:#f9e1eb;color:#c47ba7}.star{height:36px;width:36px;display:grid;place-items:center;border:1px solid #eeeef4;border-radius:50%;background:#fff;color:#b5b5c3;font-size:19px}.star:hover,.isStarred{background:#fff7e8;color:#e8a44a;border-color:#f0e1c3}.isStarred svg{fill:#e8a44a}.contactInfo{margin-top:14px;flex:1;min-width:0}.contactInfo h3{font-size:18px;font-weight:800;letter-spacing:-.03em;color:#2d304a;overflow-wrap:anywhere}.contactInfo p{font-size:9px;letter-spacing:.14em;color:#aaa8bd;font-weight:900;margin-top:6px}.phoneLine{display:flex;align-items:center;gap:8px;font-size:12px;color:#69718c;margin:12px 0}.phoneLine svg{color:#9f94dc;font-size:18px;flex:none}.phoneLine a{overflow-wrap:anywhere;min-width:0}.phoneLine a:hover{text-decoration:underline;color:#6653dc}.footer{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #f0eff5;padding-top:13px}.footer>span{font-size:9px;letter-spacing:.14em;font-weight:900;color:#bec0cc}.footer>div{display:flex;gap:6px}.footer button{display:grid;place-items:center;border:1px solid #eaeaf3;border-radius:9px;width:34px;height:34px;background:#f9f9fc;color:#8177ad;font-size:16px}.footer button:hover{background:#efedfc}.footer .delete{color:#cd8082}.footer .delete:hover{background:#fff0ed}
-.backdrop{position:fixed;inset:0;background:#171831a8;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(7px)}.modal{width:min(100%,490px);max-height:calc(100dvh - 40px);overflow-y:auto;border-radius:20px;background:#fff;padding:27px;box-shadow:0 30px 90px #0b123f45}.modalHead{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:27px}.modalHead h2{font-size:35px;line-height:1.1;color:#252942;margin-top:12px}.modalHead>button{display:grid;place-items:center;flex:none;width:38px;height:38px;border:1px solid #e5e6ee;border-radius:50%;background:#f9f9fb;color:#817b99;font-size:20px}.confirm p{font-size:14px;line-height:1.85;color:#7b8191}.confirm strong{color:#34384e}.confirm>div{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-top:29px}.confirm button{border:1px solid #e5e5ed;border-radius:10px;padding:13px 15px;background:#fff;color:#5c6174;font-size:12px;font-weight:800}.confirm .danger{background:#c95e62;color:white;border-color:#c95e62}.confirm button:disabled{opacity:.6}
-@media(max-width:560px){.card{min-height:235px}.modal{padding:21px}.modalHead h2{font-size:31px}}
-
-.phoneLine .copy{border:0;background:#f4f1ff;color:#7360d5;display:grid;place-items:center;width:29px;height:29px;flex:none;border-radius:8px;margin-left:auto;font-size:15px}.phoneLine .copy:hover{background:#e7dfff}.groupLabel{display:flex;align-items:center;gap:9px;color:#aaa6ba;font-size:9px;letter-spacing:.1em;font-weight:800;padding-bottom:12px}.groupLabel select{border:1px solid #e7e5f0;border-radius:100px;padding:5px 10px;background:#f9f8fd;color:#797095;font-size:10px;font-weight:700;letter-spacing:0;max-width:160px}.compact{min-height:0;display:grid;grid-template-columns:62px minmax(100px,1fr) minmax(100px,1fr) auto;align-items:center;gap:12px;padding:13px 16px}.compact .head{grid-column:1}.compact .contactInfo{grid-column:2;margin:0}.compact .contactInfo h3{font-size:15px}.compact .phoneLine{grid-column:3;margin:0}.compact .groupLabel{grid-column:2;padding:0;margin-top:-5px}.compact .footer{grid-column:4;grid-row:1/3;border:0;padding:0}.compact .footer>span{display:none}
-@media(max-width:660px){.compact{grid-template-columns:53px 1fr;gap:9px}.compact .head{grid-column:1}.compact .contactInfo{grid-column:2}.compact .phoneLine{grid-column:2;grid-row:2}.compact .groupLabel{grid-column:2;grid-row:3}.compact .footer{grid-column:2;grid-row:4;justify-content:flex-end}.compact .star{width:30px;height:30px}.compact .avatar{width:44px;height:44px}}
-
-/* Refined contact cards: favour the person's information and actions. */
-.card{min-height:184px;padding:15px;border-radius:13px;gap:0}
-.avatar{width:46px;height:46px;border-radius:12px;font-size:15px}
-.star{width:32px;height:32px;font-size:17px}
-.contactInfo{margin-top:10px;min-height:0}
-.contactInfo h3{font-size:16px;line-height:1.35;margin:0;overflow-wrap:anywhere}
-.phoneLine{min-width:0;margin:10px 0;font-size:12px}
-.phoneLine .copy{width:29px;height:29px}
-.groupLabel{padding-bottom:10px;gap:7px;font-size:9px}
-.groupCaption{color:#aaa6ba;font-size:9px;letter-spacing:.09em;font-weight:800}
-.groupLabel select{max-width:150px;min-width:0}
-.footer{justify-content:flex-end;margin-top:auto;padding-top:9px}
-.footer>div{display:flex;gap:6px}
-.footer button{width:32px;height:32px}
-/* The list view is a true horizontal, space-efficient directory row. */
-.compact{
- display:grid;
- grid-template-columns:76px minmax(100px,1.25fr) minmax(125px,1fr) minmax(120px,.72fr) 78px;
- grid-template-rows:1fr;
- align-items:center;
- gap:12px;
- padding:10px 15px;
- min-height:73px;
- border-radius:11px;
+.card {
+ position:relative;display:flex;flex-direction:column;min-width:0;
+ min-height:190px;padding:17px;background:#fff;border:1px solid #e9e9f3;
+ border-radius:14px;box-shadow:0 8px 28px #36335109;
+ transition:box-shadow .2s ease;
 }
-.compact .head{grid-column:1;grid-row:1;display:flex;align-items:center;justify-content:flex-start;gap:5px;min-width:0}
-.compact .avatar{width:39px;height:39px;border-radius:11px;font-size:13px}
-.compact .star{width:28px;height:28px;font-size:15px;flex:none}
-.compact .contactInfo{grid-column:2;grid-row:1;margin:0;min-width:0}
-.compact .contactInfo h3{font-size:14px;line-height:1.4}
-.compact .phoneLine{grid-column:3;grid-row:1;display:flex;align-items:center;gap:7px;margin:0;min-width:0}
-.compact .phoneLine svg{font-size:16px}
-.compact .phoneLine a{min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.compact .phoneLine .copy{width:27px;height:27px;margin-left:3px}
-.compact .groupLabel{grid-column:4;grid-row:1;display:block;margin:0;padding:0;min-width:0}
-.compact .groupCaption{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap}
-.compact .groupLabel select{display:block;width:100%;max-width:155px;height:34px;padding:6px 7px;border-radius:8px;font-size:11px;background:#f8f7fc}
-.compact .footer{grid-column:5;grid-row:1;display:flex;justify-content:flex-end;align-items:center;min-width:0;margin:0;padding:0;border:0}
-.compact .footer>div{gap:5px}
-.compact .footer button{width:33px;height:33px}
-.compact:hover{box-shadow:0 9px 22px #39355c12}
-@media(max-width:950px){
- .compact{grid-template-columns:70px minmax(105px,1.15fr) minmax(113px,1fr) minmax(108px,.75fr) 76px;gap:8px;padding:10px}
- .compact .groupLabel select{font-size:10px}
+.card:hover {box-shadow:0 12px 30px #39355c12}
+.head {display:flex;align-items:center;justify-content:flex-start}
+.avatar {width:47px;height:47px;flex:none;border-radius:13px;display:grid;place-items:center;font-size:15px;font-weight:900;letter-spacing:.025em}
+.violet{background:#e4dcff;color:#6b53c6}
+.peach{background:#fce7da;color:#c47e5e}
+.mint{background:#e1f2e7;color:#529a7a}
+.sky{background:#e0e9fc;color:#5c84c3}
+.yellow{background:#f9efd6;color:#b89555}
+.pink{background:#f9e1eb;color:#c47ba7}
+.contactInfo {display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;margin-top:12px}
+.contactInfo h3 {min-width:0;font-size:16px;font-weight:800;line-height:1.3;letter-spacing:-.025em;color:#2d304a;overflow-wrap:anywhere}
+.star {
+ width:34px;height:34px;flex:none;display:grid;place-items:center;
+ border:1px solid #ebeaf3;border-radius:50%;background:#fff;color:#9c9fb4;font-size:18px;
 }
+.star:hover,.isStarred {background:#fff6e7;border-color:#f1ddbc;color:#db9840}
+.isStarred svg {fill:currentColor}
+.phoneLine {display:flex;align-items:center;gap:8px;min-width:0;margin:12px 0 10px;color:#69718c;font-size:12px}
+.phoneLine > svg {color:#9f94dc;width:18px;height:18px;flex:none}
+.phoneLine a {min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.phoneLine a:hover {color:#6653dc;text-decoration:underline}
+.phoneLine .copy {
+ width:32px;height:32px;flex:none;display:grid;place-items:center;margin-left:3px;
+ border:1px solid #e8e4f6;border-radius:9px;background:#f4f1ff;color:#7868d6;
+}
+.phoneLine .copy svg {display:block!important;width:19px;height:19px;min-width:19px;min-height:19px;color:inherit;stroke:currentColor}
+.phoneLine .copy:hover {background:#e9e4fc;color:#5746c3}
+.groupLabel {display:flex;align-items:center;gap:9px;min-width:0;padding-bottom:12px;color:#aaa6ba;font-size:9px;font-weight:800}
+.groupCaption {font-size:9px;letter-spacing:.09em}
+.groupLabel select {
+ width:min(100%,158px);min-width:0;max-width:158px;min-height:32px;padding:6px 9px;
+ border:1px solid #e7e5f0;border-radius:10px;background:#f9f8fd;
+ color:#797095;font-size:11px;font-weight:700;
+}
+.footer {display:flex;justify-content:flex-end;align-items:center;gap:8px;border-top:1px solid #f0eff5;margin-top:auto;padding-top:11px}
+.footer > div {display:flex;align-items:center;gap:7px}
+.footer button {
+ width:35px;height:35px;display:grid;place-items:center;
+ border:1px solid #eaeaf3;border-radius:9px;background:#f9f9fc;color:#8177ad;font-size:17px;
+}
+.footer button:hover {background:#efedfc}
+.footer .delete {color:#cb787d}
+.footer .delete:hover {background:#fff0ed}
+
+/* Table-like layout for wide screens. Every control occupies the same row. */
+.compact {
+ display:grid;grid-template-columns:44px minmax(130px,1.2fr) minmax(135px,1fr) minmax(118px,.72fr) auto;
+ grid-template-rows:1fr;gap:13px;align-items:center;min-height:70px;padding:11px 14px;border-radius:12px;
+}
+.compact .head {grid-column:1;grid-row:1}
+.compact .avatar {width:41px;height:41px;border-radius:11px;font-size:14px}
+.compact .contactInfo {grid-column:2;grid-row:1;margin:0}
+.compact .contactInfo h3 {font-size:14px}
+.compact .star {width:29px;height:29px;font-size:16px}
+.compact .phoneLine {grid-column:3;grid-row:1;margin:0;font-size:12px}
+.compact .phoneLine a {overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.compact .phoneLine .copy {width:29px;height:29px;margin-left:0}
+.compact .groupLabel {grid-column:4;grid-row:1;min-width:0;margin:0;padding:0}
+.compact .groupCaption {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.compact .groupLabel select {width:100%;max-width:none;min-width:0;height:34px;padding:5px 9px}
+.compact .footer {grid-column:5;grid-row:1;margin:0;padding:0;border:0}
+.compact .footer > div {gap:6px}
+.compact .footer button {width:33px;height:33px}
+
+/* At phone widths avoid five squeezed columns and floating controls.
+   Two information lines, one dedicated line for group and actions. */
 @media(max-width:760px){
- .compact{grid-template-columns:70px minmax(0,1fr) 112px;grid-template-rows:auto auto;gap:6px 10px;min-height:86px;padding:10px 12px}
- .compact .head{grid-column:1;grid-row:1/3}
- .compact .contactInfo{grid-column:2;grid-row:1}
- .compact .phoneLine{grid-column:2;grid-row:2}
- .compact .phoneLine a{white-space:nowrap}
- .compact .groupLabel{grid-column:3;grid-row:1}
- .compact .groupLabel select{width:100%;max-width:112px;height:30px}
- .compact .footer{grid-column:3;grid-row:2}
+ .compact {
+  display:grid;grid-template-columns:44px minmax(0,1fr) auto;
+  grid-template-rows:auto auto auto;grid-template-areas:
+   "avatar name name"
+   "avatar phone phone"
+   "group group actions";
+  gap:7px 11px;align-items:center;min-height:0;padding:13px 14px;border-radius:13px;
+ }
+ .compact .head {grid-area:avatar;align-self:start;padding-top:1px}
+ .compact .avatar {width:42px;height:42px;font-size:14px}
+ .compact .contactInfo {grid-area:name;justify-content:space-between;gap:12px;min-width:0;margin:0}
+ .compact .contactInfo h3 {font-size:15px;overflow-wrap:anywhere}
+ .compact .star {width:31px;height:31px;font-size:17px}
+ .compact .phoneLine {grid-area:phone;gap:8px;min-width:0;margin:0;min-height:29px}
+ .compact .phoneLine > svg {width:16px;height:16px}
+ .compact .phoneLine a {flex:0 1 auto;min-width:0;font-size:12px}
+ .compact .phoneLine .copy {margin-left:2px;width:30px;height:30px}
+ .compact .groupLabel {grid-area:group;min-width:0;padding:4px 0 0;margin:0;justify-self:start}
+ .compact .groupLabel select {width:min(170px,calc(100vw - 166px));max-width:170px;min-height:35px;padding:7px 9px;font-size:11px}
+ .compact .footer {grid-area:actions;margin:0;padding:4px 0 0;justify-self:end;align-self:center}
+ .compact .footer > div {gap:7px}
+ .compact .footer button {width:35px;height:35px;font-size:17px}
 }
-@media(max-width:440px){
- .compact{grid-template-columns:45px minmax(0,1fr) 97px;column-gap:8px;padding:10px 9px}
- .compact .head{display:flex;flex-direction:column;justify-content:flex-start;align-items:center;gap:3px}
- .compact .avatar{width:38px;height:38px}
- .compact .star{width:26px;height:26px}
- .compact .phoneLine{font-size:11px}
- .compact .phoneLine svg{display:none}
- .compact .phoneLine .copy{width:25px;height:25px;flex:none}
- .compact .groupLabel select{max-width:97px;font-size:10px;padding:4px}
- .compact .footer button{width:31px;height:31px}
+@media(max-width:380px) {
+ .compact {grid-template-columns:39px minmax(0,1fr) auto;gap:7px 9px;padding:11px}
+ .compact .avatar {width:39px;height:39px}
+ .compact .phoneLine {gap:6px}
+ .compact .phoneLine > svg {width:15px;height:15px}
+ .compact .phoneLine .copy svg {display:block!important}
+ .compact .groupLabel select {width:min(149px,calc(100vw - 148px));max-width:149px}
+ .compact .footer > div {gap:5px}
+ .compact .footer button {width:33px;height:33px}
 }
+@media(max-width:560px) {
+ .card:not(.compact) {min-height:170px}
+ .modal {padding:20px}
+ .modalHead h2 {font-size:31px}
+}
+.backdrop {
+ position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
+ padding:18px;background:#171831ad;backdrop-filter:blur(7px);
+}
+.modal {width:min(100%,490px);max-height:calc(100dvh - 36px);overflow-y:auto;background:#fff;border-radius:20px;padding:27px;box-shadow:0 30px 90px #0b123f45}
+.modalHead {display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:26px}
+.modalHead h2 {margin-top:11px;color:#252942;font-size:35px;line-height:1.1}
+.modalHead>button {width:38px;height:38px;display:grid;place-items:center;flex:none;border:1px solid #e5e6ee;border-radius:50%;background:#f9f9fb;color:#817b99;font-size:20px}
+.confirm p {color:#7b8191;font-size:14px;line-height:1.8}
+.confirm strong {color:#34384e}
+.confirm>div {display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:12px;margin-top:28px}
+.confirm button {padding:12px 15px;border:1px solid #e5e5ed;border-radius:10px;background:#fff;color:#5c6174;font-size:12px;font-weight:800}
+.confirm .danger {background:#c95e62;color:#fff;border-color:#c95e62}
+.confirm button:disabled {opacity:.6}
