@@ -67,7 +67,7 @@ export default function ImportContacts({existing,onClose}){
    {error&&<p className={css.error} role="alert">{error}</p>}
    {name&&!error&&!rows.length&&<p className={css.notice}>No new valid contacts found. Duplicate entries and invalid numbers are skipped.</p>}
    <div className={css.actions}><button type="button" className={css.cancel} onClick={onClose} disabled={importing}>Cancel</button><button type="button" className={css.submit} disabled={!rows.length||importing} onClick={()=>void submit()}>{importing?"Importing "+progress+" / "+rows.length:"Import "+rows.length+" contacts"} ↗</button></div>
-   <p className={css.disclaimer}>Contacts are added using your existing account's contacts API. Files stay in your browser; no extra upload service is used.</p>
+   <p className={css.disclaimer}>Contacts are added using the contact API of your signed-in account. Files stay in your browser; no extra upload service is used.</p>
   </section>
  </div>;
 }
