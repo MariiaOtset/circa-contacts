@@ -1,2 +1,39 @@
 .layout{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100svh - 85px);background:#fff}.art{min-height:650px;position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:39px clamp(32px,5vw,85px);overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 73% 49%,#b4a1f9,#7263d7 65%,#5b50af);color:#fff}.art::before{content:"";position:absolute;width:660px;height:660px;border:1px solid #ffffff55;border-radius:50%;top:19%;left:18%;z-index:-1}.art::after{content:"";position:absolute;width:490px;height:490px;border:1px solid #ffffff45;border-radius:50%;top:28%;left:33%;z-index:-1}.artTop{display:flex;align-items:center;gap:14px;font-size:10px;letter-spacing:.18em;font-weight:800;color:#eee9ff}.star{font-size:35px;color:#ffe4dd;letter-spacing:0}.artBody>p{font-size:10px;letter-spacing:.15em;line-height:1.8;font-weight:800;color:#e2d8ff}.artBody h2{font-size:clamp(59px,6.2vw,100px);line-height:.95;margin:22px 0 45px}.artBody h2 em{color:#ffdfd2}.mosaic{height:210px;position:relative;max-width:560px}.mosaic>div{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:32px;border:8px solid #7463cc;color:#fff;font-size:100px;font-family:var(--serif);box-shadow:0 23px 47px #42367751}.mosaic>div span{position:absolute;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:#fff;color:#7663d4;font-family:Manrope,Arial,sans-serif;font-size:21px;right:0;bottom:-10px}.cardOne{width:185px;height:185px;background:#e3a6a0;left:0;bottom:-10px;transform:rotate(-13deg)}.cardTwo{width:155px;height:155px;background:#b5c1e7;left:32%;top:13px;transform:rotate(9deg)}.cardThree{width:135px;height:135px;background:#8bd1bb;right:4%;bottom:8px;transform:rotate(-8deg)}.artBottom{display:flex;justify-content:space-between;gap:15px;color:#e4dcfb;font-size:9px;letter-spacing:.12em;font-weight:800}.content{display:grid;place-items:center;padding:70px max(36px,7vw)}.inner{width:min(100%,465px)}.inner h1{font-size:clamp(58px,5.8vw,84px);line-height:1.02;color:#272942;margin:18px 0}.inner h1 em{color:#8270df}.description{font-size:14px;line-height:1.8;color:#8990a0;margin-bottom:31px;max-width:420px}.switch{color:#8990a2;font-size:12px;text-align:center;margin-top:27px}.switch a{color:#6755d6;font-weight:800}.switch a:hover{text-decoration:underline}.bottom{padding-top:50px;text-align:center;color:#b1b0c4;font-size:9px;letter-spacing:.16em;font-weight:800}
 @media(max-width:1040px){.art{padding:30px}.content{padding:55px 35px}.mosaic{transform:scale(.83);transform-origin:left bottom}}@media(max-width:750px){.layout{grid-template-columns:1fr;min-height:0}.art{display:none}.content{min-height:calc(100svh - 110px);padding:60px 22px}.inner{max-width:460px}.inner h1{font-size:70px}}@media(max-width:400px){.inner h1{font-size:57px}}
+
+/* Fit auth screens into the desktop viewport without a page-length promotional panel. */
+@media(min-width:751px){
+ .layout{height:calc(100dvh - 85px);min-height:0;overflow:hidden;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .art{min-height:0;min-width:0;padding:clamp(17px,3.5vh,35px) clamp(24px,4vw,60px)}
+ .artBody h2{font-size:clamp(46px,7.4vh,76px);margin:13px 0 20px;line-height:1}
+ .artBody>p{font-size:9px}
+ .mosaic{height:clamp(95px,16vh,155px);transform:scale(.76);transform-origin:left top}
+ .content{min-height:0;min-width:0;overflow-y:auto;overscroll-behavior:contain;padding:clamp(16px,2.9vh,32px) clamp(26px,4.5vw,68px)}
+ .inner{width:min(100%,445px);margin:auto}
+ .inner h1{font-size:clamp(43px,6.9vh,70px);line-height:1.03;margin:10px 0 12px}
+ .description{font-size:12px;line-height:1.65;margin-bottom:19px}
+ .switch{margin-top:18px}
+ .bottom{padding-top:19px}
+}
+@media(min-width:751px) and (max-width:920px){
+ .layout{height:calc(100dvh - 76px)}
+ .content{padding-inline:26px}
+ .mosaic{transform:scale(.63)}
+ .artBody h2{font-size:clamp(44px,6.8vh,66px)}
+}
+@media(min-width:751px) and (max-height:720px){
+ .content{padding-top:12px;padding-bottom:12px}
+ .inner h1{font-size:clamp(37px,6.7vh,49px);margin:8px 0}
+ .description{margin-bottom:12px;line-height:1.5}
+ .switch{margin-top:11px}
+ .bottom{padding-top:11px}
+ .artBody h2{font-size:clamp(42px,7vh,60px)}
+ .mosaic{height:100px;transform:scale(.62)}
+}
+@media(max-width:750px){
+ .layout{height:auto;overflow:visible}
+ .content{overflow:visible;min-height:calc(100svh - 108px);padding:38px 22px}
+ .inner h1{font-size:clamp(48px,10vw,70px);margin:12px 0}
+ .description{margin-bottom:23px}
+ .bottom{padding-top:28px}
+}

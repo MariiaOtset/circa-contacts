@@ -12,6 +12,7 @@ import ImportContacts from "../../components/ImportContacts/ImportContacts";
 import ContactList from "../../components/ContactList/ContactList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import Loader from "../../components/Loader/Loader";
+import {serializeContactsVCard} from "../../utils/vcard.js";
 import css from "./ContactsPage.module.css";
 
 const storageKey=owner=>"circa-favourites-v1:"+owner;
@@ -23,8 +24,9 @@ const csvValue=value=>{const str=String(value??"");const escaped=/^[=+\-@\t\r]/.
 export default function ContactsPage(){
  const dispatch=useDispatch(),user=useSelector(selectUser),contacts=useSelector(selectContacts),filtered=useSelector(selectFilteredContacts),loading=useSelector(selectLoading),error=useSelector(selectError),search=useSelector(selectNameFilter);
  const owner=user?.email?.trim().toLowerCase()||"local";
- const [stars,setStars]=useState(()=>({owner,ids:readStars(owner)})),[section,setSection]=useState("all"),[sort,setSort]=useState("az"),[importOpen,setImportOpen]=useState(false),[addOpen,setAddOpen]=useState(false),[viewMode,setViewMode]=useState("grid"),[groupFilter,setGroupFilter]=useState("all"),[groups,setGroups]=useState(()=>({owner,values:readGroups(owner)}));
+ const [stars,setStars]=useState(()=>({owner,ids:readStars(owner)})),[section,setSection]=useState("all"),[sort,setSort]=useState("az"),[importOpen,setImportOpen]=useState(false),[addOpen,setAddOpen]=useState(false),[viewMode,setViewMode]=useState(()=>{try{return localStorage.getItem("circa-contact-view-v1")||"list";}catch{return "list";}}),[groupFilter,setGroupFilter]=useState("all"),[groups,setGroups]=useState(()=>({owner,values:readGroups(owner)}));
  const addDialogRef=useRef(null);
+ useEffect(()=>{try{localStorage.setItem("circa-contact-view-v1",viewMode);}catch{/* Optional UI preference */}},[viewMode]);
  useEffect(()=>{dispatch(changeFilter(""));dispatch(fetchContacts());},[dispatch]);
  useEffect(()=>{setStars({owner,ids:readStars(owner)});setGroups({owner,values:readGroups(owner)});setGroupFilter("all");},[owner]);
  useEffect(()=>{if(stars.owner!==owner)return;try{localStorage.setItem(storageKey(owner),JSON.stringify(stars.ids));}catch{/* Optional browser storage */}},[stars,owner]);
@@ -48,6 +50,16 @@ export default function ContactsPage(){
   const anchor=document.createElement("a");anchor.href=href;anchor.download="circa-contacts.csv";document.body.appendChild(anchor);anchor.click();anchor.remove();window.setTimeout(()=>URL.revokeObjectURL(href),1000);
   toast.success("Contacts exported to CSV");
  };
+ const exportVCard=()=>{
+  if(!contacts.length){toast.error("Add some contacts before exporting.");return;}
+  try{
+   const content=serializeContactsVCard(contacts);
+   const url=URL.createObjectURL(new Blob([content],{type:"text/vcard;charset=utf-8"}));
+   const a=document.createElement("a");a.href=url;a.download="circa-contacts.vcf";document.body.appendChild(a);a.click();a.remove();
+   window.setTimeout(()=>URL.revokeObjectURL(url),1000);
+   toast.success("vCard ready to import into your phone");
+  }catch{toast.error("Could not prepare the vCard file.");}
+ };
  const refresh=()=>dispatch(fetchContacts());
  const openAdd=()=>setAddOpen(true);
  useEffect(()=>{
@@ -68,7 +80,7 @@ export default function ContactsPage(){
      <div className={css.metric+" "+css.metricStar}><span className={css.metricIcon}><HiOutlineStar aria-hidden="true"/></span><div><strong>{starredCount.toString().padStart(2,"0")}</strong><span>Favourites</span></div></div>
      <p className={css.quickHint}>✳ &nbsp; YOUR PERSONALISED ADDRESS BOOK</p>
     </div>
-    <div className={css.columns}><section className={css.listSection} aria-label="Your address book"><div className={css.listHeading}><div><p className="c-eyebrow">BROWSE & MANAGE</p><h2 className="c-serif">{section==="starred"?"Favourites":"All contacts"}</h2></div><div className={css.dataActions}><button type="button" title="Import contacts from CSV" className={css.export} onClick={()=>setImportOpen(true)}><HiOutlineArrowUpTray/> Import</button><button type="button" title="Export all contacts as CSV" className={css.export} onClick={exportCsv}><HiOutlineArrowDownTray/> Export CSV</button></div></div>
+    <div className={css.columns}><section className={css.listSection} aria-label="Your address book"><div className={css.listHeading}><div><p className="c-eyebrow">BROWSE & MANAGE</p><h2 className="c-serif">{section==="starred"?"Favourites":"All contacts"}</h2></div><div className={css.dataActions}><button type="button" title="Import contacts from CSV" className={css.export} onClick={()=>setImportOpen(true)}><HiOutlineArrowUpTray/> Import</button><button type="button" title="Export all contacts as CSV" className={css.export} onClick={exportCsv}><HiOutlineArrowDownTray/> Export CSV</button><button type="button" title="Download a vCard (.vcf) for importing into your phone or contacts app" className={css.export} onClick={exportVCard}><HiOutlineArrowDownTray/> Export vCard</button></div></div>
       <div className={css.toolbar}><SearchBox/><label className={css.sort}>GROUP <select aria-label="Filter contact group" value={groupFilter} onChange={e=>setGroupFilter(e.target.value)}><option value="all">All groups</option><option value="">Uncategorised</option>{groupsOptions.map(item=><option key={item} value={item}>{item}</option>)}</select></label><label className={css.sort}>SORT CONTACTS <select value={sort} aria-label="Sort contacts" onChange={e=>setSort(e.target.value)}><option value="az">Name A–Z</option><option value="za">Name Z–A</option><option value="default">Default order</option></select></label></div>
       <div className={css.listInfo}><span>{shown.length} {shown.length===1?"PERSON":"PEOPLE"} IN VIEW</span><div className={css.listActions}><div className={css.viewSwitch} role="group" aria-label="Contact view"><button aria-label="Grid view" title="Grid view" aria-pressed={viewMode==="grid"} className={viewMode==="grid"?css.selectedView:""} type="button" onClick={()=>setViewMode("grid")}><HiOutlineSquares2X2/></button><button aria-label="List view" title="List view" aria-pressed={viewMode==="list"} className={viewMode==="list"?css.selectedView:""} type="button" onClick={()=>setViewMode("list")}><HiOutlineBars3/></button></div><button type="button" onClick={()=>void refresh()} disabled={loading} aria-label="Refresh contact list" title="Refresh contacts"><HiOutlineArrowPath/> Refresh</button></div></div>
       {error&&<div className={css.error} role="alert">We could not load or update your contacts. {typeof error==="string"?error:"Please try again."} <button type="button" onClick={()=>void refresh()}>Retry ↗</button></div>}
