@@ -65,3 +65,11 @@ The authenticated address book prioritises contacts above decorative content:
 - **Add contact** opens a native accessible dialog instead of occupying a permanent right-hand sidebar.
 - The privacy notice is a short line beneath the directory, preventing empty full-height columns on tablet and laptop widths.
 - Filters, CSV import/export, favourites, groups, edit and delete remain available.
+
+## Compact workspace and native contact export
+
+- The desktop login/register layouts fit inside standard laptop viewport heights without a full-page scroll; short screens may scroll within the form panel for accessibility.
+- The contacts list now has one compact row per person on desktop and a structured two-row layout on phones. Nonessential labels have been removed, but favourite toggles, groups, copy, edit and delete still work.
+- CIRCA now remembers the selected contact layout on the current device, defaulting to list view.
+- **Export vCard (.vcf)** downloads the signed-in address book in an importable vCard 3.0 format (names and telephone numbers). Existing CSV export/import still work.
+- Footer copy uses normal brand copyright, without presentation-only portfolio labels.
