@@ -46,3 +46,13 @@ The app uses the external GoIT Connections API (`https://connections-api.goit.gl
 - No paid APIs or subscriptions added.
 
 Designed and implemented by [Mariia Otset](https://github.com/MariiaOtset).
+
+## V2 — richer CIRCA contacts experience
+
+- Shorter, denser landing page with a genuinely interactive fictional-contact preview (search and favourite sample contacts without an account).
+- Browser-only groups (Friends, Family, Work, Other), filter by group, and switch between spacious cards and compact list rows.
+- One-click phone-number copying.
+- CSV import with a local file preview, basic validation, duplicate detection and an explicit confirmation step. Supports a header with `Name` and `Phone number` and up to 200 rows per file.
+- Better documentation of data boundaries: contact data is stored with the authenticated API, while starred IDs and group labels are browser-only and not synced to other devices.
+
+**Important:** importing sends confirmed contacts to the existing external GoIT API using the signed-in session. No third-party upload service was introduced. Always review the preview before importing.
