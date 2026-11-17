@@ -5,7 +5,7 @@ import {HiOutlineArrowUpTray,HiOutlineDocumentText,HiOutlineXMark} from "react-i
 import {addContact} from "../../redux/contacts/operations";
 import css from "./ImportContacts.module.css";
 const normalizeNumber=value=>String(value||"").replace(/[^+\d]/g,"");
-const validPhone=value=>/^[+\d()\s.\-]+$/.test(value)&&/\d/.test(value)&&/^\+?\d+$/.test(normalizeNumber(value))&&value.replace(/\D/g,"").length>=7&&value.replace(/\D/g,"").length<=20;
+const validPhone=value=>/^[+\d()\s.-]+$/.test(value)&&/\d/.test(value)&&/^\+?\d+$/.test(normalizeNumber(value))&&value.replace(/\D/g,"").length>=7&&value.replace(/\D/g,"").length<=20;
 const identity=(name,number)=>name.trim().toLocaleLowerCase()+"|"+normalizeNumber(number);
 function parseCsv(text){
  const rows=[];let row=[],cell="",quoted=false;
@@ -48,14 +48,14 @@ export default function ImportContacts({existing,onClose}){
  };
  const submit=async()=>{
   if(!rows.length||importing)return;
-  setImporting(true);setError("");let added=0,failed=0;
+  setImporting(true);setError("");let added=0;const failures=[];
   for(const contact of rows){
-   try{await dispatch(addContact(contact)).unwrap();added++;}catch{failed++;}
-   setProgress(added+failed);
+   try{await dispatch(addContact(contact)).unwrap();added++;}catch{failures.push(contact);}
+   setProgress(added+failures.length);
   }
   setImporting(false);
   if(added)toast.success(added+" contact"+(added===1?"":"s")+" imported");
-  if(failed){setRows(prev=>prev.slice(-failed));setError(failed+" contacts could not be saved. Please review and retry or import them manually.");setProgress(0);}
+  if(failures.length){setRows(failures);setError(failures.length+" contacts could not be saved. Please review and retry or import them manually.");setProgress(0);}
   else onClose();
  };
  return <div className={css.backdrop} onMouseDown={event=>{if(event.target===event.currentTarget&&!importing)onClose();}}>
