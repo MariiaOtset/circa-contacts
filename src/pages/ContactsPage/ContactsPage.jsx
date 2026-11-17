@@ -1,13 +1,14 @@
 import {useEffect,useMemo,useState} from "react";
 import {useDispatch,useSelector} from "react-redux";
 import toast from "react-hot-toast";
-import {HiOutlineUserGroup,HiOutlineStar,HiOutlineArrowDownTray,HiOutlineArrowPath,HiOutlinePlus,HiOutlineArrowUpRight} from "react-icons/hi2";
+import {HiOutlineUserGroup,HiOutlineStar,HiOutlineArrowDownTray,HiOutlineArrowUpTray,HiOutlineArrowPath,HiOutlinePlus,HiOutlineArrowUpRight} from "react-icons/hi2";
 import {fetchContacts} from "../../redux/contacts/operations";
 import {selectContacts,selectFilteredContacts,selectLoading,selectError} from "../../redux/contacts/selectors";
 import {selectUser} from "../../redux/auth/selectors";
 import {changeFilter} from "../../redux/filter/slice";
 import {selectNameFilter} from "../../redux/filter/selectors";
 import ContactForm from "../../components/ContactForm/ContactForm";
+import ImportContacts from "../../components/ImportContacts/ImportContacts";
 import ContactList from "../../components/ContactList/ContactList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import Loader from "../../components/Loader/Loader";
@@ -19,7 +20,7 @@ const csvValue=value=>{const str=String(value??"");const escaped=/^[=+\-@\t\r]/.
 export default function ContactsPage(){
  const dispatch=useDispatch(),user=useSelector(selectUser),contacts=useSelector(selectContacts),filtered=useSelector(selectFilteredContacts),loading=useSelector(selectLoading),error=useSelector(selectError),search=useSelector(selectNameFilter);
  const owner=user?.email?.trim().toLowerCase()||"local";
- const [stars,setStars]=useState(()=>({owner,ids:readStars(owner)})),[section,setSection]=useState("all"),[sort,setSort]=useState("az");
+ const [stars,setStars]=useState(()=>({owner,ids:readStars(owner)})),[section,setSection]=useState("all"),[sort,setSort]=useState("az"),[importOpen,setImportOpen]=useState(false);
  useEffect(()=>{dispatch(changeFilter(""));dispatch(fetchContacts());},[dispatch]);
  useEffect(()=>{setStars({owner,ids:readStars(owner)});},[owner]);
  useEffect(()=>{if(stars.owner!==owner)return;try{localStorage.setItem(storageKey(owner),JSON.stringify(stars.ids));}catch{/* Optional browser storage */}},[stars,owner]);
@@ -46,7 +47,7 @@ export default function ContactsPage(){
    <aside className={css.sidebar} aria-label="Workspace navigation"><div className={css.sidebarTop}><span className={css.sideIcon}>✳</span><div><strong>MY WORKSPACE</strong><small>PERSONAL ADDRESS BOOK</small></div></div><div className={css.navLabel}>COLLECTIONS</div><nav className={css.sideNav} aria-label="Contact categories"><button type="button" className={section==="all"?css.selected:""} onClick={()=>setSection("all")}><HiOutlineUserGroup/> All people <span>{contacts.length}</span></button><button type="button" className={section==="starred"?css.selected:""} onClick={()=>setSection("starred")}><HiOutlineStar/> Favourites <span>{starredCount}</span></button></nav><div className={css.sideFooter}><div className={css.sideFooterIcon}>♡</div><strong>The little connections matter.</strong><p>A well-kept contact list keeps your people just a little closer.</p></div><p className={css.sidebarCredit}>CIRCA / CONTACTS MANAGER — V1</p></aside>
    <div className={css.workspace}><header className={css.welcome}><div><p className="c-eyebrow">YOUR SPACE / THE CONTACT EDITION</p><h1 className="c-serif">Your people,<br/><em>beautifully organised.</em></h1><p>Keep your circle close. Everything you need to remember, all in one lovely little place.</p></div><div className={css.welcomeBadge}><span aria-hidden="true">✳</span><strong>HELLO, {user?.name?.trim()?.split(" ")[0]||"FRIEND"}</strong><small>YOU ARE IN GOOD COMPANY</small></div></header>
     <div className={css.metricGrid}><div className={css.metric}><div><span>PEOPLE IN YOUR CIRCLE</span><HiOutlineUserGroup/></div><strong>{contacts.length.toString().padStart(2,"0")}</strong><p>Total contacts in your address book</p></div><div className={css.metric+" "+css.metricStar}><div><span>THE SPECIAL ONES</span><HiOutlineStar/></div><strong>{starredCount.toString().padStart(2,"0")}</strong><p>Saved to your favourites on this device</p></div><div className={css.metric+" "+css.metricNote}><div><span>YOUR PERSONAL DIRECTORY</span><span aria-hidden="true">✦</span></div><h2 className="c-serif">Keep good<br/>company.</h2><a href="#add-contact">Add someone new <HiOutlineArrowUpRight aria-hidden="true"/></a></div></div>
-    <div className={css.columns}><section className={css.listSection} aria-label="Your address book"><div className={css.listHeading}><div><p className="c-eyebrow">YOUR CIRCLE, ALL IN ONE PLACE</p><h2 className="c-serif">{section==="starred"?"Your favourite people.":"The good company."}</h2></div><button type="button" title="Export all contacts as CSV" className={css.export} onClick={exportCsv}><HiOutlineArrowDownTray/> Export CSV</button></div>
+    <div className={css.columns}><section className={css.listSection} aria-label="Your address book"><div className={css.listHeading}><div><p className="c-eyebrow">YOUR CIRCLE, ALL IN ONE PLACE</p><h2 className="c-serif">{section==="starred"?"Your favourite people.":"The good company."}</h2></div><div className={css.dataActions}><button type="button" title="Import contacts from CSV" className={css.export} onClick={()=>setImportOpen(true)}><HiOutlineArrowUpTray/> Import</button><button type="button" title="Export all contacts as CSV" className={css.export} onClick={exportCsv}><HiOutlineArrowDownTray/> Export CSV</button></div></div>
       <div className={css.toolbar}><SearchBox/><label className={css.sort}>SORT CONTACTS <select value={sort} aria-label="Sort contacts" onChange={e=>setSort(e.target.value)}><option value="az">Name A–Z</option><option value="za">Name Z–A</option><option value="default">Default order</option></select></label></div>
       <div className={css.listInfo}><span>{shown.length} {shown.length===1?"PERSON":"PEOPLE"} IN VIEW</span><button type="button" onClick={()=>void refresh()} disabled={loading} aria-label="Refresh contact list" title="Refresh contacts"><HiOutlineArrowPath/> Refresh</button></div>
       {error&&<div className={css.error} role="alert">We could not load or update your contacts. {typeof error==="string"?error:"Please try again."} <button type="button" onClick={()=>void refresh()}>Retry ↗</button></div>}
@@ -56,5 +57,6 @@ export default function ContactsPage(){
     </div>
    </div>
   </div>
+  {importOpen&&<ImportContacts existing={contacts} onClose={()=>setImportOpen(false)}/>}
  </main>;
 }
