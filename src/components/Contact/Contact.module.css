@@ -79,18 +79,18 @@
    "group group actions";
   gap:7px 11px;align-items:center;min-height:0;padding:13px 14px;border-radius:13px;
  }
- .compact .head {grid-area:avatar;grid-row:auto;grid-column:auto;align-self:start;padding-top:1px}
+ .compact .head {grid-area:avatar;align-self:start;padding-top:1px}
  .compact .avatar {width:42px;height:42px;font-size:14px}
- .compact .contactInfo {grid-area:name;grid-row:auto;grid-column:auto;justify-content:space-between;gap:12px;min-width:0;margin:0}
+ .compact .contactInfo {grid-area:name;justify-content:space-between;gap:12px;min-width:0;margin:0}
  .compact .contactInfo h3 {font-size:15px;overflow-wrap:anywhere}
  .compact .star {width:31px;height:31px;font-size:17px}
- .compact .phoneLine {grid-area:phone;grid-row:auto;grid-column:auto;gap:8px;min-width:0;margin:0;min-height:29px}
+ .compact .phoneLine {grid-area:phone;gap:8px;min-width:0;margin:0;min-height:29px}
  .compact .phoneLine > svg {width:16px;height:16px}
  .compact .phoneLine a {flex:0 1 auto;min-width:0;font-size:12px}
  .compact .phoneLine .copy {margin-left:2px;width:30px;height:30px}
- .compact .groupLabel {grid-area:group;grid-row:auto;grid-column:auto;min-width:0;padding:4px 0 0;margin:0;justify-self:start}
+ .compact .groupLabel {grid-area:group;min-width:0;padding:4px 0 0;margin:0;justify-self:start}
  .compact .groupLabel select {width:min(170px,calc(100vw - 166px));max-width:170px;min-height:35px;padding:7px 9px;font-size:11px}
- .compact .footer {grid-area:actions;grid-row:auto;grid-column:auto;margin:0;padding:4px 0 0;justify-self:end;align-self:center}
+ .compact .footer {grid-area:actions;margin:0;padding:4px 0 0;justify-self:end;align-self:center}
  .compact .footer > div {gap:7px}
  .compact .footer button {width:35px;height:35px;font-size:17px}
 }
