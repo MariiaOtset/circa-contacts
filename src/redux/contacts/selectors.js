@@ -1,18 +1,11 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { selectNameFilter, selectNumberFilter } from "../filter/selectors";
-
-export const selectContacts = (state) => state.contacts.items;
-export const selectLoading = (state) => state.contacts.isLoading;
-export const selectError = (state) => state.contacts.error;
-export const selectEditing = (state) => state.contacts.editing;
-
-export const selectFilteredContacts = createSelector(
-  [selectContacts, selectNameFilter, selectNumberFilter],
-  (contacts, nameFilter, numberFilter) => {
-    return contacts.filter(
-      (contact) =>
-        contact.name.toLowerCase().includes(nameFilter.toLowerCase()) ||
-        contact.number.includes(numberFilter)
-    );
-  }
-);
+import {createSelector} from "@reduxjs/toolkit";
+import {selectNameFilter} from "../filter/selectors";
+export const selectContacts=state=>state.contacts.items;
+export const selectLoading=state=>state.contacts.loading;
+export const selectError=state=>state.contacts.error;
+export const selectEditing=()=>false;
+export const selectFilteredContacts=createSelector([selectContacts,selectNameFilter],(contacts,search)=>{
+ const needle=(search||"").trim().toLowerCase();
+ if(!needle)return contacts;
+ return contacts.filter(contact=>String(contact.name||"").toLowerCase().includes(needle)||String(contact.number||"").toLowerCase().includes(needle));
+});

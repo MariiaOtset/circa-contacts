@@ -1,13 +1,1 @@
-.btn {
-  padding: 7px 10px;
-  background-color: #c24afe;
-}
-
-.form {
-  border: 3px solid greenyellow;
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
+.form{display:flex;flex-direction:column;gap:18px}.btn{display:flex;align-items:center;justify-content:space-between;width:100%;height:55px;padding:0 20px;background:#6857dc;border:1px solid #6857dc;color:#fff;border-radius:11px;font-size:13px;font-weight:800;transition:background .2s}.btn:hover{background:#5544bf}.btn:disabled{opacity:.6;cursor:not-allowed}.btn span{font-size:21px}.note{text-align:center;font-size:11px;color:#9ba0b0;line-height:1.7}

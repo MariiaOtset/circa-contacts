@@ -1,28 +1,5 @@
-import css from "./ContactList.module.css";
 import Contact from "../Contact/Contact";
-import { useSelector } from "react-redux";
-import {
-  selectError,
-  selectFilteredContacts,
-  selectLoading,
-} from "../../redux/contacts/selectors";
-
-const ContactList = () => {
-  const filteredContacts = useSelector(selectFilteredContacts);
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
-
-  return (
-    <>
-      <ul className={css.list}>
-        {loading && !error && <p>Loading...Please wait</p>}
-        {error && <p>Ooops, something went wrong! Please try again</p>}
-        {filteredContacts.map(({ id, name, number }) => (
-          <Contact key={id} id={id} name={name} number={number} />
-        ))}
-      </ul>
-    </>
-  );
-};
-
-export default ContactList;
+import css from "./ContactList.module.css";
+export default function ContactList({contacts=[],starred=[],onToggleStar}){
+ return <ul className={css.list}>{contacts.map(contact=><li key={contact.id} className={css.item}><Contact contact={contact} starred={starred.includes(contact.id)} onToggleStar={()=>onToggleStar(contact.id)}/></li>)}</ul>;
+}
