@@ -1,6 +1,7 @@
 import {Suspense,lazy,useEffect} from "react";
 import {useDispatch,useSelector} from "react-redux";
 import {Route,Routes} from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop.jsx";
 import {refreshUser} from "./redux/auth/operations";
 import {selectIsRefreshing} from "./redux/auth/selectors";
 import Layout from "./components/Layout/Layout";
@@ -18,7 +19,7 @@ export default function App(){
  const dispatch=useDispatch(),refreshing=useSelector(selectIsRefreshing);
  useEffect(()=>{dispatch(refreshUser());},[dispatch]);
  if(refreshing)return <div className="app-loading" role="status"><div><span aria-hidden="true">✳</span>Restoring your workspace…</div></div>;
- return <Layout><Suspense fallback={<div className="app-loading" role="status"><Loader/></div>}><Routes>
+ return <Layout><ScrollToTop/><Suspense fallback={<div className="app-loading" role="status"><Loader/></div>}><Routes>
   <Route path="/" element={<HomePage/>}/>
   <Route path="/register" element={<RestrictedRoute redirectTo="/contacts" component={<RegisterPage/>}/>}/>
   <Route path="/login" element={<RestrictedRoute redirectTo="/contacts" component={<LoginPage/>}/>}/>
