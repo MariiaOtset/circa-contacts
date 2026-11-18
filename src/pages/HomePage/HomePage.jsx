@@ -29,7 +29,7 @@ export default function HomePage(){
   <section className={css.hero}><div className={css.heroGrid+" c-container"}>
    <div className={css.heroCopy}>
     <p className="c-eyebrow">✳ &nbsp; THE ART OF STAYING IN TOUCH</p>
-    <h1 className="c-serif">Your people.<br/><em>Beautifully</em><br/>together.</h1>
+    <h1 className="c-serif">Your people. <em>Beautifully</em> together.</h1>
     <p>One lovely, organised place for the people who matter. Save contacts, find familiar names, and keep your circle close — without the clutter.</p>
     <div className={css.actions}><Link to={destination} className="c-btn">{loggedIn?"Open my contacts":"Get started for free"} <HiOutlineArrowUpRight/></Link><a href="#features" className={css.secondary}>Explore the features <span>↓</span></a></div>
     <div className={css.heroNote}><span className="c-dot"/> YOUR PERSONAL CONTACTS, SIMPLIFIED <span>·</span> FREE TO EXPLORE</div>
@@ -53,10 +53,10 @@ export default function HomePage(){
    <div className={css.featureGrid}>{features.map((f,i)=><article className={css.feature} key={f.title}><div className={css.featureTop}><span>0{i+1} / CIRCA</span><span className={css.featureIcon}>{f.icon}</span></div><h3 className="c-serif">{f.title}</h3><p>{f.text}</p></article>)}</div>
   </section>
   <section className={css.walkthrough}><div className={css.walkthroughInner+" c-container"}>
-   <div className={css.walkthroughCopy}><p className="c-eyebrow">MADE TO MAKE EVERYDAY EASIER</p><h2 className="c-serif">A better way to<br/><em>keep in touch.</em></h2><p>Everything important, without everything getting in the way.</p><Link to={destination} className="c-btn">{loggedIn?"Go to workspace":"Create your space"} <HiOutlineArrowUpRight/></Link></div>
+   <div className={css.walkthroughCopy}><p className="c-eyebrow">MADE TO MAKE EVERYDAY EASIER</p><h2 className="c-serif">A better way to <em>keep in touch.</em></h2><p>Everything important, without everything getting in the way.</p><Link to={destination} className="c-btn">{loggedIn?"Go to workspace":"Create your space"} <HiOutlineArrowUpRight/></Link></div>
    <div className={css.steps}>{steps.map(s=><div className={css.step} key={s.n}><span>{s.n}</span><div><h3>{s.title}</h3><p>{s.text}</p></div><span aria-hidden="true">↗</span></div>)}</div>
   </div></section>
-  <section className={css.closing+" c-container"}><div><p className="c-eyebrow">YOUR CIRCLE STARTS HERE</p><h2 className="c-serif">Good connections.<br/><em>One beautiful space.</em></h2></div><Link to={destination} className="c-btn">{loggedIn?"Open CIRCA":"Start your address book"} <HiOutlineArrowUpRight/></Link></section>
+  <section className={css.closing+" c-container"}><div><p className="c-eyebrow">YOUR CIRCLE STARTS HERE</p><h2 className="c-serif">Good connections. <em>One beautiful space.</em></h2></div><Link to={destination} className="c-btn">{loggedIn?"Open CIRCA":"Start your address book"} <HiOutlineArrowUpRight/></Link></section>
   <div className={css.footerExtra} aria-hidden="true"><HiOutlineArrowDownTray/><HiOutlinePencilSquare/><HiOutlineStar/></div>
  </div>;
 }
