@@ -478,3 +478,26 @@
  .dataActions .export{font-size:10px}
  .sidebar .sideNav button{gap:5px;font-size:11px}
 }
+
+
+/* The workspace must be allowed to shrink inside the sidebar grid. */
+.dashboard{grid-template-columns:minmax(0,190px) minmax(0,1fr)}
+.workspace,.listSection,.listHeading,.toolbar,.listInfo,.listActions,.metric,.metric>div{min-width:0}
+.dataActions .export{min-width:0;max-width:100%}
+@media(min-width:851px) and (max-width:1170px){.dashboard{grid-template-columns:minmax(0,168px) minmax(0,1fr)}}
+@media(max-width:850px){.dashboard{display:block}.workspace{width:100%}}
+@media(max-width:600px){
+ .listInfo{align-items:flex-start;gap:9px}
+ .listActions{max-width:100%;gap:7px}
+ .dataActions .export{overflow-wrap:anywhere}
+ .sort{min-width:0}
+ .sort select{width:100%;min-width:0}
+}
+@media(max-width:350px){
+ .metricGrid{grid-template-columns:1fr}
+ .metric:last-child{grid-column:auto}
+ .dataActions{grid-template-columns:1fr}
+ .dataActions .export:last-child{grid-column:auto}
+ .toolbar{grid-template-columns:1fr}
+ .toolbar>div:first-child{grid-column:1}
+}
