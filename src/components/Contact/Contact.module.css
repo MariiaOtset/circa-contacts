@@ -144,3 +144,17 @@
  .phoneLine{min-width:0}
  .modal{max-width:100%;padding:18px}
 }
+
+
+/* No viewport-based sizing inside a potentially narrower dashboard card. */
+.compact,.card,.contactInfo,.phoneLine,.groupLabel,.footer{min-width:0;max-width:100%}
+@media(max-width:760px){
+ .compact{grid-template-columns:minmax(0,42px) minmax(0,1fr);grid-template-areas:"avatar name" "avatar phone" "group group" "actions actions";gap:8px 10px}
+ .compact .contactInfo{grid-area:name}
+ .compact .phoneLine{grid-area:phone}
+ .compact .groupLabel{grid-area:group;width:100%}
+ .compact .groupLabel select{width:100%;max-width:100%;min-width:0}
+ .compact .footer{grid-area:actions;justify-self:stretch;justify-content:flex-end;border-top:1px solid #f0eff5;padding-top:8px}
+ .compact .phoneLine a{flex:1 1 auto;min-width:0}
+}
+@media(max-width:380px){.compact{grid-template-columns:39px minmax(0,1fr)}}
