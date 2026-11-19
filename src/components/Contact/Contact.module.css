@@ -123,3 +123,24 @@
 .confirm button {padding:12px 15px;border:1px solid #e5e5ed;border-radius:10px;background:#fff;color:#5c6174;font-size:12px;font-weight:800}
 .confirm .danger {background:#c95e62;color:#fff;border-color:#c95e62}
 .confirm button:disabled {opacity:.6}
+
+
+/* Cards use their own available width, not the viewport, for actions. */
+.card,.compact{max-width:100%;min-width:0}
+.phoneLine a{overflow-wrap:anywhere}
+@media(max-width:960px){
+ .compact{grid-template-columns:42px minmax(0,1fr) auto;grid-template-rows:auto auto auto;grid-template-areas:"avatar name name" "avatar phone phone" "group group actions";gap:8px 10px}
+ .compact .head{grid-area:avatar;align-self:start}
+ .compact .contactInfo{grid-area:name;min-width:0}
+ .compact .phoneLine{grid-area:phone;min-width:0}
+ .compact .groupLabel{grid-area:group}
+ .compact .footer{grid-area:actions;justify-self:end}
+}
+@media(max-width:420px){
+ .compact .groupLabel{width:100%;min-width:0}
+ .compact .groupLabel select{width:100%;max-width:100%;min-width:0}
+ .compact .footer{max-width:100%}
+ .compact .footer button{width:32px;height:32px}
+ .phoneLine{min-width:0}
+ .modal{max-width:100%;padding:18px}
+}
