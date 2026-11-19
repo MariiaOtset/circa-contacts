@@ -446,3 +446,35 @@
  .welcome h1{font-size:clamp(35px,3vw,46px);line-height:1.08}
  .welcomeCopy>p:last-child{max-width:none}
 }
+
+
+/* Dashboard refinement: predictable content widths and useful, consistent stat cards. */
+.dashboard,.workspace,.columns,.listSection,.listHeading,.dataActions,.toolbar{min-width:0;max-width:100%}
+.metricGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:24px}
+.metric{min-width:0;min-height:76px;gap:13px;border-radius:14px;padding:13px 15px;box-shadow:0 6px 22px #29285307}
+.metric>div{min-width:0}.metric>div>span{font-size:11px;line-height:1.35}
+.listHeading{align-items:center}.dataActions{justify-content:flex-end}.export{min-width:0}
+.toolbar>*{min-width:0}.sort select{max-width:100%}
+.listInfo{flex-wrap:wrap}.listActions{flex-wrap:wrap}
+@media(max-width:1100px){.metricGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.metric{padding:11px}.metricIcon{width:33px;height:33px}}
+@media(max-width:850px){.listHeading{align-items:flex-start}.toolbar{grid-template-columns:minmax(0,1fr) minmax(0,150px) minmax(0,150px)}}
+@media(max-width:600px){
+ .metricGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:23px}
+ .metric:last-child{grid-column:1/-1}
+ .metric{min-height:70px}
+ .listHeading{gap:12px}
+ .dataActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:7px}
+ .dataActions .export{white-space:normal;line-height:1.25;min-height:42px;padding:8px 9px;text-align:center}
+ .dataActions .export:last-child{grid-column:1/-1}
+ .toolbar{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .toolbar>div:first-child{grid-column:1/-1;width:100%}
+ .sort select{font-size:12px}
+ .empty{padding:24px 19px}.empty h3{font-size:clamp(25px,7vw,31px)}
+ .skeletons{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:360px){
+ .metric{padding:9px 8px;gap:8px}.metricIcon{width:30px;height:30px}.metric strong{font-size:21px}
+ .metric>div>span{font-size:9px}
+ .dataActions .export{font-size:10px}
+ .sidebar .sideNav button{gap:5px;font-size:11px}
+}
